@@ -36,6 +36,10 @@ class HomeModel extends ChangeNotifier {
 
     final result = await DioApi.get(path: '${ConfigUrl.topRated}&page=$page&sort_by=$_sortBy');
 
+    print(page);
+    print('${ConfigUrl.topRated}&page=$page&sort_by=$_sortBy');
+
+
     if (result.response != null) {
       final data = result.response?.data;
       // final List<dynamic> moviList = data['results'];
@@ -53,24 +57,9 @@ class HomeModel extends ChangeNotifier {
       }
 
       final List<TopRatedMovies> newMovies =  topRatedMoviesFromJson(filteredList);
-      
-      if(_movies.length != 0){
-        final tempMovies = _movies.addAll(newMovies);
-        isLoading = false;
-        if(_sortBy == sortByDate){
-          print(_sortBy);
-          _movies.sort((a, b) => b.releaseDate.toString().compareTo(a.releaseDate.toString()));
-        }if(_sortBy == sortByPopularity){
-          print(_sortBy);
-          _movies.sort((a, b) => b.popularity.toString().compareTo(a.popularity.toString()));
-        }if(_sortBy == sortByVotingAvg){
-          print(_sortBy);
-          _movies.sort((a, b) => b.voteAverage.toString().compareTo(a.voteAverage.toString()));
-        }
-        isLoading = true;
-      }  else {
+
         _movies.addAll(newMovies);
-      }
+
 
       isLoading = false;
       page++;
