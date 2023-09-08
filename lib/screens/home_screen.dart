@@ -109,7 +109,8 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Column(
           children: [
-            Expanded(
+            Expanded( 
+              //asdf
               child: ListView.builder(
                 itemCount: movieProvider.isSearchVisible
                     ? movieProvider.searchMoviesList.length
